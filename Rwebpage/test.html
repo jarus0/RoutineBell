@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <script>
+
+
+(function () {
+  if (window.addEventListener) {
+      window.addEventListener('load', run, false);
+  } else if (window.attachEvent) {
+      window.attachEvent('onload', run);
+  }
+
+  function run() {
+      var t = document.getElementById('myTable');
+      t.onclick = function (event) {
+          event = event || window.event; //IE8
+          var target = event.target || event.srcElement;
+          while (target && target.nodeName != 'TR') { // find TR
+              target = target.parentElement;
+          }
+          //if (!target) { return; } //tr should be always found
+          var cells = target.cells; //cell collection - https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement
+          //var cells = target.getElementsByTagName('td'); //alternative
+          if (!cells.length || target.parentNode.nodeName == 'THEAD') {
+              return;
+          }
+          var f1 = document.getElementById('firstname');
+          var f2 = document.getElementById('lastname');
+          var f3 = document.getElementById('age');
+          var f4 = document.getElementById('total');
+          var f5 = document.getElementById('discount');
+          var f6 = document.getElementById('diff');
+          f1.value = cells[0].innerHTML;
+          f2.value = cells[1].innerHTML;
+          f3.value = cells[2].innerHTML;
+          f4.value = cells[3].innerHTML;
+          f5.value = cells[4].innerHTML;
+          f6.value = cells[5].innerHTML;
+          console.log(target.nodeName, event);
+      };
+  }
+
+})();
+  </script>
+</head>
+<table id="myTable" cellspacing="1">
+  <thead>
+      <tr>
+          <th>first name</th>
+          <th>last name</th>
+          <th>age</th>
+          <th>total</th>
+          <th>discount</th>
+          <th>diff</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>peter</td>
+          <td>parker</td>
+          <td>28</td>
+          <td>9.99</td>
+          <td>20.3%</td>
+          <td>+3</td>
+      </tr>
+      <tr>
+          <td>john</td>
+          <td>hood</td>
+          <td>33</td>
+          <td>19.99</td>
+          <td>25.1%</td>
+          <td>-7</td>
+      </tr>
+      <tr>
+          <td>clark</td>
+          <td>kent</td>
+          <td>18</td>
+          <td>15.89</td>
+          <td>44.2%</td>
+          <td>-15</td>
+      </tr>
+      <tr>
+          <td>bruce</td>
+          <td>almighty</td>
+          <td>45</td>
+          <td>153.19</td>
+          <td>44%</td>
+          <td>+19</td>
+      </tr>
+      <tr>
+          <td>bruce</td>
+          <td>evans</td>
+          <td>56</td>
+          <td>153.19</td>
+          <td>23%</td>
+          <td>+9</td>
+      </tr>
+  </tbody>
+
+
+</table>Firstname is:
+<input type="text" id="firstname" />
+<br>Lastname is:
+<input type="text" id="lastname" />
+<br>Age is:
+<input type="text" id="age" />
+<br>Total is:
+<input type="text" id="total" />
+<br>Discount is:
+<input type="text" id="discount" />
+<br>Diff is:
+<input type="text" id="diff" />
+
+
+
+
+
+</html>

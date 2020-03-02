@@ -30,12 +30,12 @@ File_related_operations::~File_related_operations() {
 
 void File_related_operations::getIRinstance(IRrecv *tempIRrecv)
 {
-	ptrIRrecv1 = tempIRrecv;
+	//ptrIRrecv1 = tempIRrecv;
 }
 
 void File_related_operations::jwriteFile(jStr temp_path, jStr temp_message){
-	ptrIRrecv1->disableIRIn();
-	GlobalMutexLU.lock();
+	//ptrIRrecv1->disableIRIn();
+	//GlobalMutexLU.lock();
 	const char *path = temp_path.c_str();
 	const char *message = temp_message.c_str();
 
@@ -51,14 +51,14 @@ void File_related_operations::jwriteFile(jStr temp_path, jStr temp_message){
     else
     	JJLOG.println("- failed to open file for writing");
     file.close();
-    GlobalMutexLU.unlock();
-    ptrIRrecv1->enableIRIn();
+    //GlobalMutexLU.unlock();
+    //ptrIRrecv1->enableIRIn();
 }
 
 void File_related_operations::jappendFile(jStr temp_path, jStr temp_message){
 
-	ptrIRrecv1->disableIRIn();
-	GlobalMutexLU.lock();
+	//ptrIRrecv1->disableIRIn();
+	//GlobalMutexLU.lock();
 	const char *path = temp_path.c_str();
 	const char *message = temp_message.c_str();
 
@@ -68,7 +68,7 @@ void File_related_operations::jappendFile(jStr temp_path, jStr temp_message){
     if(!file){
         JJLOG.println("- failed to open file for appending");
         file.close();
-        GlobalMutexLU.unlock();
+        //GlobalMutexLU.unlock();
         return;
     }
     if(file.print(message))
@@ -76,14 +76,14 @@ void File_related_operations::jappendFile(jStr temp_path, jStr temp_message){
     else
     	JJLOG.println("- append failed");
     file.close();
-    GlobalMutexLU.unlock();
-    ptrIRrecv1->enableIRIn();
+    //GlobalMutexLU.unlock();
+    //ptrIRrecv1->enableIRIn();
 }
 
 void File_related_operations::jsaveVectorToFile(jStr path, std::vector<uint16_t> *toSaveVector)
 {
-	ptrIRrecv1->disableIRIn();
-	GlobalMutexLU.lock();
+	//ptrIRrecv1->disableIRIn();
+	//GlobalMutexLU.lock();
 
     JJLOG.println("vector saving " + String (path.c_str()) );
 
@@ -98,13 +98,13 @@ void File_related_operations::jsaveVectorToFile(jStr path, std::vector<uint16_t>
     	JJLOG.println("- failed to open file for writing");
 	file.close();
 	JJLOG.println("vector written to file");
-	GlobalMutexLU.unlock();
-	ptrIRrecv1->enableIRIn();
+	//GlobalMutexLU.unlock();
+	//ptrIRrecv1->enableIRIn();
 }
 std::vector<uint16_t> File_related_operations::jgetVectorFromFile(jStr path)
 {
-	ptrIRrecv1->disableIRIn();
-	GlobalMutexLU.lock();
+	//ptrIRrecv1->disableIRIn();
+	//GlobalMutexLU.lock();
 	JJLOG.printf("vector reading from file:-> %s\r\n", path.c_str());
 
 	std::vector<uint16_t> IRvector;
@@ -130,14 +130,14 @@ std::vector<uint16_t> File_related_operations::jgetVectorFromFile(jStr path)
 	else
 		JJLOG.println("- failed to open file for reading");
 	file.close();
-	GlobalMutexLU.unlock();
-	ptrIRrecv1->enableIRIn();
+	//GlobalMutexLU.unlock();
+	//ptrIRrecv1->enableIRIn();
 	return IRvector;
 }
 
 void File_related_operations::jrenameFile(jStr temp_path1, jStr temp_path2){
-	ptrIRrecv1->disableIRIn();
-	GlobalMutexLU.lock();
+	//ptrIRrecv1->disableIRIn();
+	//GlobalMutexLU.lock();
 	const char *path1 = temp_path1.c_str();
 	const char *path2 = temp_path2.c_str();
     JJLOG.printf("Renaming file %s to %s\r\n", path1, path2);
@@ -146,13 +146,13 @@ void File_related_operations::jrenameFile(jStr temp_path1, jStr temp_path2){
     	JJLOG.println("- file renamed");
     else
     	JJLOG.println("- rename failed");
-    GlobalMutexLU.unlock();
-    ptrIRrecv1->enableIRIn();
+    //GlobalMutexLU.unlock();
+    //ptrIRrecv1->enableIRIn();
 }
 
 void File_related_operations::jdeleteFile(jStr temp_path){
-	ptrIRrecv1->disableIRIn();
-	GlobalMutexLU.lock();
+	//ptrIRrecv1->disableIRIn();
+	//GlobalMutexLU.lock();
     const char *path = temp_path.c_str();
 
     JJLOG.print("Deleting "+ String (path));
@@ -161,12 +161,12 @@ void File_related_operations::jdeleteFile(jStr temp_path){
 		JJLOG.println(" deleted");
 	else
 		JJLOG.println(" can't delete");
-    GlobalMutexLU.unlock();
-    ptrIRrecv1->enableIRIn();
+    //GlobalMutexLU.unlock();
+    //ptrIRrecv1->enableIRIn();
 }
 void File_related_operations::jdeleteFolder(jStr temp_path){
-	ptrIRrecv1->disableIRIn();
-	GlobalMutexLU.lock();
+	//ptrIRrecv1->disableIRIn();
+	//GlobalMutexLU.lock();
 
     File root = SPIFFS.open(temp_path.c_str());
     if(root && root.isDirectory())
@@ -193,16 +193,16 @@ void File_related_operations::jdeleteFolder(jStr temp_path){
     	}
     }
     root.close();
-    GlobalMutexLU.unlock();
-    ptrIRrecv1->enableIRIn();
+    //GlobalMutexLU.unlock();
+    //ptrIRrecv1->enableIRIn();
 }
 
 jsonNested File_related_operations::jlistDir(jStr temp_dirname, uint8_t levels)
 {
-	ptrIRrecv1->disableIRIn();
+	//ptrIRrecv1->disableIRIn();
 	// future some patiya is here solve in future
 	jsonNested temp;
-	GlobalMutexLU.lock();
+	//GlobalMutexLU.lock();
 	const char *dirname = temp_dirname.c_str();
 
     JJLOG.printf("Listing directory: %s\r\n", dirname);
@@ -210,12 +210,12 @@ jsonNested File_related_operations::jlistDir(jStr temp_dirname, uint8_t levels)
     File root = SPIFFS.open(dirname);
     if(!root){
         JJLOG.println("- failed to open directory");
-        GlobalMutexLU.unlock();
+        //GlobalMutexLU.unlock();
         return temp;
     }
     if(!root.isDirectory()){
         JJLOG.println(" - not a directory");
-        GlobalMutexLU.unlock();
+        //GlobalMutexLU.unlock();
         return temp;
     }
 
@@ -236,15 +236,15 @@ jsonNested File_related_operations::jlistDir(jStr temp_dirname, uint8_t levels)
         }
         file = root.openNextFile();
     }
-    GlobalMutexLU.unlock();
-    ptrIRrecv1->enableIRIn();
+    //GlobalMutexLU.unlock();
+    //ptrIRrecv1->enableIRIn();
     return temp;
 }
 
 jStr File_related_operations::jreadFile(jStr temp_path)
 {
-	GlobalMutexLU.lock();
-	ptrIRrecv1->disableIRIn();
+	//GlobalMutexLU.lock();
+	//ptrIRrecv1->disableIRIn();
 	jStr returnStr = "";
 	//JJLOG.println("one issue is here see it later");
 
@@ -271,16 +271,16 @@ jStr File_related_operations::jreadFile(jStr temp_path)
     file.close();
 
 
-    ptrIRrecv1->enableIRIn();
-    GlobalMutexLU.unlock();
+    //ptrIRrecv1->enableIRIn();
+    //GlobalMutexLU.unlock();
     return returnStr;
 
 }
 
 void File_related_operations::jtestFileIO(jStr temp_path)
 {
-	ptrIRrecv1->disableIRIn();
-	GlobalMutexLU.lock();
+	//ptrIRrecv1->disableIRIn();
+	//GlobalMutexLU.lock();
 	const char *path = temp_path.c_str();
     JJLOG.printf("Testing file I/O with %s\r\n", path);
 
@@ -289,7 +289,7 @@ void File_related_operations::jtestFileIO(jStr temp_path)
     File file = SPIFFS.open(path, FILE_WRITE);
     if(!file){
         JJLOG.println("- failed to open file for writing");
-        GlobalMutexLU.unlock();
+        //GlobalMutexLU.unlock();
         return;
     }
 
@@ -334,18 +334,18 @@ void File_related_operations::jtestFileIO(jStr temp_path)
     } else {
         JJLOG.println("- failed to open file for reading");
     }
-    GlobalMutexLU.unlock();
-    ptrIRrecv1->enableIRIn();
+    //GlobalMutexLU.unlock();
+    //ptrIRrecv1->enableIRIn();
 }
 
 void File_related_operations::jformat()
 {
-	ptrIRrecv1->disableIRIn();
-	GlobalMutexLU.lock();
+	//ptrIRrecv1->disableIRIn();
+	//GlobalMutexLU.lock();
 	if (SPIFFS.format())
 		JJLOG.println("\n\nSuccess format");
 	else
 		JJLOG.println("\n\nError format");
-	GlobalMutexLU.unlock();
-	ptrIRrecv1->enableIRIn();
+	//GlobalMutexLU.unlock();
+	//ptrIRrecv1->enableIRIn();
 }

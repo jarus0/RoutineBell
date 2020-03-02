@@ -195,14 +195,142 @@ extern "C" void app_main()
 
 
 
-
+//enum placeS
+//{
+//
+//}
+//
 
 	initiate();
 
-	JJLOG.println("&&&&&&&&&&&&&&&&&&&&&&&when file read then ir fire crash device");
+/*
+	jStr fileName = "/Routine";
+	jStr currentActionCounter = "/Routine";
+
+	jsonPair somePair;
+//	somePair["1"] = "T,dd:hh:mm:ss,A0";
+
+	somePair["0"] = "T,14:05:31:14,A0";
+	somePair["1"] = "D,15:06:32:15,A1";
+	somePair["2"] = "D,16:07:33:16,A2";
+	somePair["3"] = "T,17:08:34:17,A3";
+
+	jStr someStr = objJarusAccessories.getJsonStr( &somePair );
+	jobjFileOperation.jwriteFile( fileName + "0", someStr );
+	jobjFileOperation.jwriteFile( currentActionCounter, "2" );
 
 
+	//time_t	_currentTime = RTC.get();
 
+	objJdeviceFunctionality.printDateTime(RTC.get());
+
+	if ( true alram triggered )
+	{
+		jStr sile = jobjFileOperation.jreadFile( currentActionCounter );
+		String so = jobjFileOperation.jreadFile( currentActionCounter ).c_str();
+		int currentPostion = so.toInt();
+
+		jStr fileRead = jobjFileOperation.jreadFile( fileName + String (currentPostion/10 ).c_str() );
+
+		jarusJSON someJSON = objJarusAccessories.jgetJJSON(fileRead);
+		objJarusAccessories.printjarusJSON(&someJSON);
+
+		jStr ac = String (currentPostion % 10 ).c_str();
+
+		fileRead = someJSON.vjsonPair[ac].substr( 0, 1 ); JJLOG.println ( fileRead .c_str() );
+
+//		fileRead = someJSON.vjsonPair[ac].substr( 2, 2 ); JJLOG.println ( fileRead .c_str() );
+//		fileRead = someJSON.vjsonPair[ac].substr( 5, 2 ); JJLOG.println ( fileRead .c_str() );
+//		fileRead = someJSON.vjsonPair[ac].substr( 8, 2 ); JJLOG.println ( fileRead .c_str() );
+//		fileRead = someJSON.vjsonPair[ac].substr( 11, 2 ); JJLOG.println ( fileRead .c_str() );
+//		jStr alarmType = someJSON.vjsonPair[ac].substr( 14, 2 ); JJLOG.println ( fileRead .c_str() );
+
+		switch ( someJSON.vjsonPair[ac].substr( 14, 2 ) )
+		{
+		    case "A0":
+		    	JJLOG.println("this is short alarm");
+		        break;
+		    case "A1":
+		    	JJLOG.println("this is medium alarm");
+		        break;
+		    case "A2":
+		    	JJLOG.println("this is long alarm");
+		        break;
+		    default:
+		}
+
+		// default values
+		RTC.setAlarm(ALM1_MATCH_DATE, 0, 0, 0, 1);
+		RTC.setAlarm(ALM2_MATCH_DATE, 0, 0, 0, 1);
+		RTC.alarm(ALARM_1);
+		RTC.alarm(ALARM_2);
+		RTC.alarmInterrupt(ALARM_1, false);
+		RTC.alarmInterrupt(ALARM_2, false);
+		RTC.squareWave(SQWAVE_NONE);		    //RTC.set(compileTime());
+
+		if ( "D" == someJSON.vjsonPair[ac].substr( 0, 1 ) )
+		{
+			JJLOG.println("this is delay");
+			//"T,14:05:31:14,A0";
+			timeStore tempAlarmTime;
+			tempAlarmTime._day 	= String (someJSON.vjsonPair[ac].substr( 2, 2 ).c_str()).toInt();
+			tempAlarmTime._hour = String (someJSON.vjsonPair[ac].substr( 5, 2 ).c_str()).toInt();
+			tempAlarmTime._min	= String (someJSON.vjsonPair[ac].substr( 8, 2 ).c_str()).toInt();
+			tempAlarmTime._sec	= String (someJSON.vjsonPair[ac].substr( 11, 2 ).c_str()).toInt();
+
+			RTC.setAlarm(
+				ALM1_MATCH_DATE,		// type of alarm future : can be improve this but chale bhai nasa mate thodik chee
+				tempAlarmTime._sec,
+				tempAlarmTime._min,
+				tempAlarmTime._hour,
+				tempAlarmTime._day
+			);
+
+			RTC.alarmInterrupt(ALARM_1, true);
+			delay(100);
+
+		}
+*/
+
+		//RTC.alarmInterrupt(ALARM_1, true);
+/*
+		time_t _currentTime;
+		while (true)	// only jarus know what he has done here
+		{
+			_currentTime = RTC.get(); delay(300);
+			if (RTC.get() == _currentTime)
+			{
+				break;
+			}
+		}
+
+		timeStore alarmDelay = ConvertSectoDay(String ( seconds.c_str() ).toInt());	//setTime(int hr,int min,int sec,int dy, int mnth, int yr);
+
+		// future make alarm for days, weeks, months
+		timeStore tempAlarmTime;
+		tempAlarmTime._day		=   + day		(_currentTime);
+		tempAlarmTime._sec		=	alarmDelay._sec		+ second	(_currentTime);
+		tempAlarmTime._min		=	alarmDelay._min		+ minute	(_currentTime) + (tempAlarmTime._sec/60);
+		tempAlarmTime._hour		=	alarmDelay._hour	+ hour		(_currentTime) + (tempAlarmTime._min/60);
+		tempAlarmTime._min		%= 60;
+		tempAlarmTime._sec 		%= 60;
+
+
+		JJLOG.print ("Alarm Time DDHHMMSS : ");
+
+		JJLOG.print (tempAlarmTime._day);	JJLOG.print (" ");
+		JJLOG.print (tempAlarmTime._hour);	JJLOG.print (":");
+		JJLOG.print (tempAlarmTime._min);	JJLOG.print (":");
+		JJLOG.print (tempAlarmTime._sec);	JJLOG.println();		*/
+
+//
+//	  String fileContain = readFile ( “Routine1” + String (x / 10) )      // lots of files reading based on number 24 / 10 = 2
+//	  temp = decode (fileContain)
+//	  temp []
+	}
+
+
+//	JJLOG.println("&&&&&&&&&&&&&&&&&&&&&&&when file read then ir fire crash device");
 
 //	RTC.squareWave(SQWAVE_1_HZ);	//delay(5000);
 //	RTC.squareWave(SQWAVE_NONE);
@@ -210,72 +338,30 @@ extern "C" void app_main()
 
 	// maintain the sequense
 
-	#if DECODE_HASH	// Ignore messages with less than minimum on or off pulses.
-		irrecv.setUnknownThreshold(objJirTransceiver.JkMinUnknownSize);
-	#endif  // DECODE_HASH
-		irrecv.enableIRIn();  // Start the receiver
-	irsend.begin();
-
-
-	objJirTransceiver.setInstance(&irrecv, &irsend);
-	jobjFileOperation.getIRinstance(&irrecv);
-
-
-	xTaskCreate(&JirTransceiver_handler, "IRHandler", 4048, (void*) &objJirTransceiver, 1, NULL);
-
-
-//	IRContainer irData;
-//	while (true)
-//	{		esp_task_wdt_reset();
-//  	vTaskDelay(10 / portTICK_PERIOD_MS);
+//	#if DECODE_HASH	// Ignore messages with less than minimum on or off pulses.
+//		irrecv.setUnknownThreshold(objJirTransceiver.JkMinUnknownSize);
+//	#endif  // DECODE_HASH
+//		irrecv.enableIRIn();  // Start the receiver
+//	irsend.begin();
 //
 //
-//		irData = jobjFileOperation.jgetVectorFromFile	(
-//				"/but/b1"  );
-//		objJirTransceiver.SendIRFromIRContainer(&irData);
+//	objJirTransceiver.setInstance(&irrecv, &irsend);
+//	jobjFileOperation.getIRinstance(&irrecv);
 //
-//		delay(50);
 //
-//		 irData = jobjFileOperation.jgetVectorFromFile	(
-//				"/but/b2"  );
-//		objJirTransceiver.SendIRFromIRContainer(&irData);
-//
-//		delay(50);
-//
-//		irData = jobjFileOperation.jgetVectorFromFile	(
-//				"/but/b4"  );
-//		objJirTransceiver.SendIRFromIRContainer(&irData);
-//
-//		delay(50);
-//		irData = jobjFileOperation.jgetVectorFromFile	(
-//				"/but/b5"  );
-//		objJirTransceiver.SendIRFromIRContainer(&irData);
-//		delay(50);
-//
-//	}
-
-
-
-
-//
-//	rgbVal myColor;
-//	myColor.r = 255;
-//	myColor.g = 255;
-//	myColor.b = 255;
-//
-//	objRGB.ws2812_setColors(2, &myColor); //rgbVal
+//	xTaskCreate(&JirTransceiver_handler, "IRHandler", 4048, (void*) &objJirTransceiver, 1, NULL);
 //
 
 
 
 
-	device_info();
+//	device_info();
 
-	objRGB.ws2812_init(5);//ws2812_init(WS2812_PIN);
-	xTaskCreate(&LightHandlerhandler, "ws2812 rainbow demo", 4096, (void *) &objRGB, 10, NULL);
-
-
-	objJdeviceFunctionality.func_stopFlow(0);
+//	objRGB.ws2812_init(5);//ws2812_init(WS2812_PIN);
+//	xTaskCreate(&LightHandlerhandler, "ws2812 rainbow demo", 4096, (void *) &objRGB, 10, NULL);
+//
+//
+//	objJdeviceFunctionality.func_stopFlow(0);
 
 //	objJdeviceFunctionality.suraj;
 //	objJdeviceFunctionality.mehual;
@@ -288,27 +374,28 @@ extern "C" void app_main()
 //  // when excuting favo same time firing button device crash
 	// many placess heap allocation given file operator get rid of that later
 
-
-	JJLOG.println("main while loop started");
-	pinMode(15, INPUT_PULLUP);
-	JJLOG.println("connect gnd pin 15 to clear spiff");
-
-	long someTime = millis();
+//
+//	JJLOG.println("main while loop started");
+//	pinMode(15, INPUT_PULLUP);
+//	JJLOG.println("connect gnd pin 15 to clear spiff");
+//
+//	long someTime = millis();
 	pinMode(interruptPin, INPUT_PULLUP);
 	attachInterrupt(digitalPinToInterrupt(interruptPin), handleInterrupt, FALLING);
+//
+//	JJLOG.println("mainloop starting");
 
-	JJLOG.println("mainloop starting");
 
-
-	irrecv.disableIRIn();
+	//irrecv.disableIRIn();
+//
 	httpd_handle_t jserver = NULL;
 	CommunicationMode obj_comM;
+	//obj_comM.jwifi_init_STA(&jserver);
+	obj_comM.jwifi_init_AP(&jserver);
+//	irrecv.enableIRIn();
 
-	obj_comM.jwifi_init_softap_sta_both(&jserver);
-	irrecv.enableIRIn();
-
-	xTaskCreate(&JWebSocketsServer_handler, "jarusWebsocket", 8024, NULL, 1, NULL);
-	objJdeviceFunctionality.test_function();
+//	xTaskCreate(&JWebSocketsServer_handler, "jarusWebsocket", 8024, NULL, 1, NULL);
+//	objJdeviceFunctionality.test_function();
 
 
 	JJLOG.println("alarm setting for 5 sec");			// testing alarm is working or not
@@ -316,31 +403,8 @@ extern "C" void app_main()
 
 
 
-
-
-
-//
-///*
-//	device turn on
-//	if (read config file)
-//		get router config otherwise null
-//
-//	set both sta and ap mode
-//
-//	try to coonect router
-//	also wait for stations to connect
-//
-//	if no body connect to ap -> disable ap mode
-//	if no router find turn off staion mode
-//*/
-//
-//
-
-
-
-
-	objRGB.jRainbowStart(false);
-	rgbVal rgb ;
+//	objRGB.jRainbowStart(false);
+//	rgbVal rgb ;
 //	rgb = {255,0,0};	objRGB.ws2812_setColors(2, &rgb);delay(1000);
 //	rgb = {0,255,0};	objRGB.ws2812_setColors(2, &rgb);delay(1000);
 //	rgb = {0,0,255};	objRGB.ws2812_setColors(2, &rgb);delay(1000);
@@ -359,30 +423,8 @@ extern "C" void app_main()
 	while(1)
 	  {
 
-
-//
-//		obj_JWebSocketsServer
-//		cmdFromWebSocket
-//		String send2App =  objJdeviceFunctionality.jsonDE(collectedJsonFromWebSocket.c_str());
-
-
-
-
 		esp_task_wdt_reset();
 	  	vTaskDelay(10 / portTICK_PERIOD_MS);
-
-	  	if (flagForFLowExecution)
-	  	{
-	  		flagForFLowExecution = false;
-	  		JJLOG.println("Interrupt Flag Resetting|Flow Starting");
-	  		objJdeviceFunctionality.funcScheduleHandler();
-
-	  	}
-	  	if ((someTime + 2 * 60 * 1000) < millis())
-	  	{
-	  		someTime = millis();
-	  		objJdeviceFunctionality.printDateTime(RTC.get());
-	  	}
 
 		if(interruptCounter>0)
 		{
@@ -400,17 +442,16 @@ extern "C" void app_main()
 			  JJLOG << millis() << " ALARM_1 ";
 			  objJdeviceFunctionality.printDateTime(RTC.get());
 			  JJLOG << endl;
-			  flagForFLowExecution = true;
 
 		  }
 
 		}
-		if ( ! digitalRead(15))
-		{
-			JJLOG.println("spiff formatting");
-			jobjFileOperation.jformat();
-			JJLOG.println("spiff formated");
-		}
+//		if ( ! digitalRead(15))
+//		{
+//			JJLOG.println("spiff formatting");
+//			jobjFileOperation.jformat();
+//			JJLOG.println("spiff formated");
+//		}
 
 	  }
 

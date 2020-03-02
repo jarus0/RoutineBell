@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <style>
+    table, td
+    {
+      border: 1px solid blue;
+      
+    }
+  
+  
+  .dot 
+  {
+    height: 25px;
+    width: 30px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-top:20px; 
+
+  }
+    </style>
+  
+  <script>
+
+    var postion = 0;
+  function nextElementTable(arg) 
+  {
+    var table = document.getElementById("myTable")
+    var y = table.rows[1].cloneNode(true);
+    y.getElementsByClassName('1').className = table.rows.length.toString();
+    table.appendChild(y)
+    table.lastChild.getElementsByClassName('1').className = '5';
+    console.log (table.rows.length) 
+  }
+
+  function daySelect(arg) {
+
+    var some = document.getElementsByClassName(arg);
+    console.log(some[0].style.backgroundColor)
+    if (some[0].style.backgroundColor == 'blue')
+    {
+      some[0].style.backgroundColor = "red"
+    }
+    else if (some[0].style.backgroundColor == 'red')
+    {
+      some[0].style.backgroundColor = "blue"
+    } 
+    else
+    {
+      some[0].style.backgroundColor = "blue"
+    }
+
+    console.log(arg)
+    some.dot = "red";
+
+  }
+  function selectFun1()
+{
+  var some = document.getElementsByClassName('dot');
+  for (var i = 0; i < some.length; i++) {
+    some[i].style.backgroundColor = 'blue'
+  }
+}
+function selectFun2()
+{
+  var some = document.getElementsByClassName('dot');
+  for (var i = 0; i < some.length; i++) {
+    some[i].style.backgroundColor = 'red'
+  }
+}
+
+
+
+
+    (function () {
+  if (window.addEventListener) {
+      window.addEventListener('load', run, false);
+  } else if (window.attachEvent) {
+      window.attachEvent('onload', run);
+  }
+
+  function run() {
+      var t = document.getElementById('myTable');
+      t.onclick = function (event) {
+          event = event || window.event; //IE8
+          var target = event.target || event.srcElement;
+          while (target && target.nodeName != 'TR') 
+          { // find TR
+              target = target.parentElement;
+          }
+          //if (!target) { return; } //tr should be always found
+          var cells = target.cells; //cell collection - https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement
+          //var cells = target.getElementsByTagName('td'); //alternative
+          if (!cells.length || target.parentNode.nodeName == 'THEAD') {
+              return;
+          }
+          console.log ( postion )
+          var buttonX = cells[postion].getElementsByClassName('btn');
+          if ( postion == 0 )
+          {
+            if (buttonX[0].innerHTML == "At")
+            {
+              buttonX[0].innerHTML = "After";
+            }
+            else if (buttonX[0].innerHTML == "After")
+            {
+              buttonX[0].innerHTML = "At";
+            }
+            else
+            {
+              buttonX[0].innerHTML = "After";
+            }
+            console.log ( cells[postion] )  
+          }
+          if ( postion == 1 )
+          {
+            if (buttonX[0].innerHTML == "At")
+            {
+              buttonX[0].innerHTML = "After";
+            }
+            else if (buttonX[0].innerHTML == "After")
+            {
+              buttonX[0].innerHTML = "At";
+            }
+            else
+            {
+              buttonX[0].innerHTML = "After";
+            }
+            console.log ( cells[postion] )  
+          }
+          
+          console.log ( cells[postion] )
+          var buttonX = cells[postion].getElementsByClassName('btn');
+
+          
+
+      };
+  }
+
+})();
+function selectFun3()
+{
+  var some = document.getElementsByClassName('dot');
+  for (var i = 0; i < some.length; i++) 
+  {
+    if (some[i].style.backgroundColor == 'blue')
+    {
+      some[i].style.backgroundColor = "red"
+    }
+    else if (some[i].style.backgroundColor == 'red')
+    {
+      some[i].style.backgroundColor = "blue"
+    } 
+    else
+    {
+      some[i].style.backgroundColor = "blue"
+    }
+
+  }
+
+  
+
+}
+function atBtn(arg)
+{
+  postion = 0;
+}
+function timeBtn(arg)
+{
+  postion = 1;
+}
+function alTyBtn(arg)
+{
+  postion = 2;
+}
+function deleBtn(arg)
+{
+  postion = 3;
+}
+
+  </script>
+
+</head>
+<body>
+
+<h1>Routine Setting Page</h1>
+<button onclick="selectFun1(this.className)">Select All</button>
+<button onclick="selectFun2(this.className)">Select None</button>
+<button onclick="selectFun3(this.className)">Select Inverse</button>
+
+<p> Select Days to Repeat </p>
+<div style="text-align:left">
+  <span class="sun dot" onclick="daySelect(this.className)">Sun</span>
+  <span class="mon dot" onclick="daySelect(this.className)">Mon</span>
+  <span class="tue dot" onclick="daySelect(this.className)">Tue</span>
+  <span class="wed dot" onclick="daySelect(this.className)">Wed</span>
+  <span class="thu dot" onclick="daySelect(this.className)">Thu</span>
+  <span class="fri dot" onclick="daySelect(this.className)">Fri</span>
+  <span class="sat dot" onclick="daySelect(this.className)">Sat</span>
+</div>
+
+
+
+<br>
+<button onclick="nextElementTable()"> Add next Routine </button>
+<br><br>
+<table id="myTable">
+  
+  <tr>
+    <td>Mode</td>
+    <td>Time</td>
+    <td>Alarm types</td>
+  </tr>
+
+  <tr>
+
+    
+    <td>
+      <button class="btn" onclick="atBtn()"> At </button>
+    </td>
+    <td>
+      <button class="btn" onclick="timeBtn()"> 05:34 PM </button>
+    </td>
+    <td>
+      <button class="btn" onclick="alTyBtn()"> Short </button>  
+    </td>
+    <td>
+      <button class="btn" onclick="deleBtn()"> Delete </button>
+    </td>
+
+  </tr>
+
+
+</table>
+<br>
+
+<input type="datetime-local" name="rtcTime" id="jtime" value=%rtcTime% onclick="currentTime()">
+
+
+
+<p id="demo"></p>
+
+
+</body>
+</html>
+
+

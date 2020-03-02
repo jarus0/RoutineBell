@@ -161,14 +161,12 @@ void CommunicationMode::jwifi_init_softap_sta_both(void *arg)
 
 
     ESP_ERROR_CHECK(tcpip_adapter_dhcps_stop(TCPIP_ADAPTER_IF_AP));
-
-    tcpip_adapter_ip_info_t ipAddressInfo;
-    memset(&ipAddressInfo, 0, sizeof(ipAddressInfo));
-    IP4_ADDR(&ipAddressInfo.ip,10,10,10,1);
-    IP4_ADDR(&ipAddressInfo.gw,10,10,10,1);
-    IP4_ADDR(&ipAddressInfo.netmask,255,255,255,0);
-    ESP_ERROR_CHECK(tcpip_adapter_set_ip_info(TCPIP_ADAPTER_IF_AP, &ipAddressInfo));
-
+		tcpip_adapter_ip_info_t ipAddressInfo;
+		memset(&ipAddressInfo, 0, sizeof(ipAddressInfo));
+		IP4_ADDR(&ipAddressInfo.ip,10,10,10,1);
+		IP4_ADDR(&ipAddressInfo.gw,10,10,10,1);
+		IP4_ADDR(&ipAddressInfo.netmask,255,255,255,0);
+		ESP_ERROR_CHECK(tcpip_adapter_set_ip_info(TCPIP_ADAPTER_IF_AP, &ipAddressInfo));
     ESP_ERROR_CHECK(tcpip_adapter_dhcps_start(TCPIP_ADAPTER_IF_AP));
 
     tcpip_adapter_ip_info_t ipAddressInfo123 = {};
@@ -287,10 +285,10 @@ void CommunicationMode::jwifi_init_STA(void *arg)
 
 	tcpip_adapter_init();
 
-	ESP_ERROR_CHECK( mdns_init() );
-	ESP_ERROR_CHECK( mdns_hostname_set(mdnsName.c_str()) );
-	ESP_ERROR_CHECK( mdns_instance_name_set(mdnsInstane.c_str()) );
-	ESP_ERROR_CHECK( tcpip_adapter_set_hostname(TCPIP_ADAPTER_IF_STA, mdnsSomethingunk.c_str()	) );
+//	ESP_ERROR_CHECK( mdns_init() );
+//	ESP_ERROR_CHECK( mdns_hostname_set			(mdnsName.c_str()) );
+//	ESP_ERROR_CHECK( mdns_instance_name_set		(mdnsInstane.c_str()) );
+//	ESP_ERROR_CHECK( tcpip_adapter_set_hostname	(TCPIP_ADAPTER_IF_STA, mdnsSomethingunk.c_str()	) );
 
     tcpip_adapter_ip_info_t ipAddressInfo123 = {};
 	tcpip_adapter_get_ip_info(TCPIP_ADAPTER_IF_AP, &ipAddressInfo123);
