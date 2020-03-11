@@ -1,0 +1,112 @@
+// HTML web page to handle 3 input fields (StartTime1,EndTime1, rtcTime)
+const char smps_page[] PROGMEM = R"rawliteral(
+<h1> smps </h1>
+
+<p>%smps0% </p>
+<p>%smps1% </p>
+<p>%smps2% </p>
+<p>%smps3% </p>
+<p>%smps4% </p>
+
+
+<br />  <br />
+
+<p>%all_log% </p>
+
+)rawliteral";
+
+const char index_html[] PROGMEM = R"rawliteral(
+<!DOCTYPE HTML><html><head>
+  <title>ESP Input Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    function submitMessage()
+    {
+      alert("Saved value to ESP SPIFFS");
+      setTimeout(function(){ document.location.reload(false); }, 500);
+    }
+
+    Number.prototype.AddZero= function(b,c){
+        var  l= (String(b|| 10).length - String(this).length)+1;
+        return l> 0? new Array(l).join(c|| '0')+this : this;
+     }//to add zero to less than 10,
+
+    function currentTime()
+    {
+      var d = new Date(),
+      localDateTime= [d.getFullYear(),(d.getMonth()+1).AddZero(),d.getDate().AddZero(), ].join('-') +
+                      'T' +  
+                      [d.getHours().AddZero(),d.getMinutes().AddZero()].join(':');
+      var elem=document.getElementById("jtime");
+      elem.value = localDateTime;
+    }
+
+
+  function myFunction()
+    {
+      jslider_varible = document.getElementById('jslider');
+      slider_value_show = document.getElementById('id_slider_value_show');
+      slider_value_show.innerHTML = jslider_varible.value;
+    };
+
+
+
+  </script></head><body>
+
+
+  <form action="/get" target="hidden-form">
+
+
+    <input type="radio" name="mode" value="ldr"  %mode1%> Ldr intensity <br>
+    <input type="radio" name="mode" value="timer" %mode2% > Set Schedule <br>
+
+    Light intensity: <input type="range" name="points" min="0" max="100" id="jslider" oninput="myFunction()" value=%intensity%>
+    <output name = "name Jaurs" id = "id_slider_value_show"> %intensity%</output>
+
+    <br />  <br />
+
+    Schedule:-1
+    <br/>
+    <input type="time" name="st0" value=%st0%>
+    <input type="time" name="et0" value=%et0%>
+    <br />  <br />
+
+    Schedule:-2
+    <br/>
+    <input type="time" name="st1" value=%st1%>
+    <input type="time" name="et1" value=%et1%>
+    <br />  <br />
+
+    Schedule:-3
+    <br/>
+    <input type="time" name="st2" value=%st2%>
+    <input type="time" name="et2" value=%et2%>
+    <br />  <br />
+
+    schedule:-4
+    <br/>
+    <input type="time" name="st3" value=%st3%>
+    <input type="time" name="et3" value=%et3%>
+    <br />  <br />
+
+    schedule:-5
+    <br/>
+    <input type="time" name="st4" value=%st4%>
+    <input type="time" name="et4" value=%et4%>
+    <br />  <br />
+
+   <form action="/get" target="hidden-form">
+    Set Clock Time: <input type="datetime-local" name="rtcTime" id="jtime" value=%rtcTime% onclick="currentTime()">
+
+
+  <br />  <br />
+    <center>
+      <input type="submit" value="Submit" onclick="submitMessage()">
+    </center>
+
+
+   </form>
+
+ <iframe style="display:none" name="hidden-form"></iframe>
+ </body></html>
+ )rawliteral";

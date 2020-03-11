@@ -1,0 +1,592 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+table, td
+{
+  border: 3px solid blue;
+}
+   
+.dot 
+{
+  height: 25px;
+  width: 30px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin-top:20px; 
+}
+
+.header 
+{
+  padding: 5px 5px;
+  background: #555;
+  color: #f1f1f1;
+}
+
+.content 
+{
+  padding: 5px;
+}
+
+.sticky 
+{
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + .content 
+{
+  padding-top: 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+</style>
+  <link rel="stylesheet" href="/styles.css">
+  </head>
+<body>
+  
+  <div id="myModal" class="modal">
+    
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close">&times;</span>
+        <h2>Set Delay Time</h2>
+        <p>Use slider or Select an option</p>
+        <output name = "name Jaurs" id = "id_slider_value_show"> 0 </output>
+      </div>
+      <div class="modal-body">
+        
+
+    <label id='sliderValShow' for="delaySlider">Delay Slider</label><br>
+    <input class="idelay" id="jslider1" type="range" name="points" min="0" max="100" id="jslider" oninput="sliderFunc()" value="0">
+    <br>
+
+    <input type="radio" name="ndelay" onclick="checkBox(this.value)" value="5 Min"   > 5 Min  <br>
+    <input type="radio" name="ndelay" onclick="checkBox(this.value)" value="10 Min"  > 10 Min <br>
+    <input type="radio" name="ndelay" onclick="checkBox(this.value)" value="30 Min"  > 30 Min <br>
+    <input type="radio" name="ndelay" onclick="checkBox(this.value)" value="1 Hour"  > 1 Hour <br>
+    <input type="radio" name="ndelay" onclick="checkBox(this.value)" value="2 Hour"  > 2 Hour <br>
+
+  </div>
+  <div class="modal-footer">
+
+  
+  <button class="close1" type="button" onclick=subPageCloseBtn()><h3>Press to Save & Exit</h3></button>
+      </div>
+    </div>
+  
+  </div>
+
+<div class="header" id="myHeader">
+<!---h1----><h1>Routine Setting Page</h1>
+  <p>Change Device Time :-  </p>
+  <input type="datetime-local" name="rtcTime" id="jtime" value=%rtcTime% onclick="currentTime()">
+
+  <h4> Select Days to Repeat </h4>
+  <button onclick="selectFun1(this.className)">Select All</button>
+  <button onclick="selectFun2(this.className)">Select None</button>
+  <button onclick="selectFun3(this.className)">Select Inverse</button>
+
+  <br><br>
+
+  <span class="sun dot" onclick="daySelect(this.className)">Sun</span>
+  <span class="mon dot" onclick="daySelect(this.className)">Mon</span>
+  <span class="tue dot" onclick="daySelect(this.className)">Tue</span>
+  <span class="wed dot" onclick="daySelect(this.className)">Wed</span>
+  <span class="thu dot" onclick="daySelect(this.className)">Thu</span>
+  <span class="fri dot" onclick="daySelect(this.className)">Fri</span>
+  <span class="sat dot" onclick="daySelect(this.className)">Sat</span>
+
+<br>
+<button onclick="newElementTable()"> Add next Routine </button>
+<br><br>
+
+</div>
+
+
+<div class="content">
+
+<table id="myTable">
+  
+  <tr>
+    <td>Sr</td>
+    <td>When</td>
+    <td>Time</td>
+    <td>Alarm types</td>
+    <td>Edit</td>
+  </tr>
+
+<tr>
+  <td>
+    <button class="srn" onclick=srN()> 1 </button>
+  </td>
+  <td>
+    <button class="btn" onclick="atBtn()"> At </button>
+  </td>
+  <td>
+    <input class="timeElement" onclick=timeBtn() type="time" name="st0" value="">
+    <button class="sliderElement" onclick=timeBtn() style="display:none" >Press D. Time</button>
+  </td>
+  <td>
+    <button class="btn" onclick="alTyBtn()"> Short (5s) </button>  
+  </td>
+  <td>
+    <button class="btn" onclick="deleBtn()"> Delete </button>
+  </td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</table>
+
+
+<br>
+
+
+
+
+
+<p id="demo"></p>
+
+
+
+
+<script>// Get the modal
+
+var modal = document.getElementById("myModal");
+console .log ( modal );
+var xm = 5;
+console .log (xm);
+
+
+var span1 = document.getElementsByClassName("close1")[0];
+var span = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
+
+function openSubPageWhenClick() 
+{
+  console.log(modal)
+  modal.style.display = "block";
+};
+
+var delayTimeInstance;
+var cellInstance;
+function subPageCloseBtn () {
+  console.log ('closing window')
+  modal.style.display     = "none";
+  console.log (cellInstance)
+  cellInstance.innerHTML  = delayTimeInstance
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+
+function sliderFunc() {
+  console.log ("hi from slider")
+  jslider_varible = document.getElementById('jslider1');
+  slider_value_show = document.getElementById('sliderValShow');
+  slider_value_show.innerHTML = 'Delay Time ' + jslider_varible.value + ' min';
+  delayTimeInstance = jslider_varible.value + ' min';
+  
+};
+
+function checkBox(valValue) {
+  console.log (valValue)
+  delayTimeInstance = valValue
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//document.addEventListener('contextmenu', event => event.preventDefault());
+window.onscroll = function() {myFunction1()};
+
+function myFunction1() 
+{
+  var header = document.getElementById("myHeader");
+  var sticky = header.offsetTop;
+
+// console.log (sticky)
+// console.log (window.pageYOffset)
+
+  if (window.pageYOffset > sticky) 
+  {
+    header.classList.add("sticky");
+  } 
+  else 
+  {
+    header.classList.remove("sticky");
+  }
+}
+
+
+
+
+var postion = 0;
+function newElementTable( arg )
+{
+  var table = document.getElementById("myTable")
+  var y = table.rows[1].cloneNode(true);
+  y.getElementsByClassName('1').className = table.rows.length.toString();
+  table.appendChild(y)
+  table.lastChild.getElementsByClassName('1').className = '5';
+  console.log (table.rows.length) 
+}
+
+function daySelect(arg) 
+{
+  var some = document.getElementsByClassName(arg);
+  console.log(some[0].style.backgroundColor)
+  if (some[0].style.backgroundColor == 'blue')
+  {
+    some[0].style.backgroundColor = "red"
+  }
+  else if (some[0].style.backgroundColor == 'red')
+  {
+    some[0].style.backgroundColor = "blue"
+  } 
+  else
+  {
+    some[0].style.backgroundColor = "blue"
+  }
+
+  console.log(arg)
+  some.dot = "red";
+
+}
+function selectFun1()
+{
+  var some = document.getElementsByClassName('dot');
+  for (var i = 0; i < some.length; i++) 
+  {
+    some[i].style.backgroundColor = 'blue'
+  }
+}
+function selectFun2()
+{
+var some = document.getElementsByClassName('dot');
+for (var i = 0; i < some.length; i++) {
+  some[i].style.backgroundColor = 'red'
+}
+}
+
+
+
+  var instance;
+  (function () 
+  {
+  if (window.addEventListener) 
+  {
+    window.addEventListener('load', run, false);
+  } 
+  else if (window.attachEvent) 
+  {
+    window.attachEvent('onload', run);
+  }
+
+  
+  function run() 
+  {
+      var t = document.getElementById('myTable');
+      t.onclick = function (event) 
+      {
+          event = event || window.event; //IE8
+          var target = event.target || event.srcElement;
+          while (target && target.nodeName != 'TR') // find TR
+          { 
+              target = target.parentElement;
+          }
+          //if (!target) { return; } //tr should be always found
+          var cells = target.cells; //cell collection - https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement
+          //var cells = target.getElementsByTagName('td'); //alternative
+          if (!cells.length || target.parentNode.nodeName == 'THEAD') {
+              return;
+          }
+          
+          var buttonX = cells[postion].getElementsByClassName('btn');
+          //cellInstance = cells[postion].getElementsByClassName('btn');
+
+          console .log ("postion " + postion)
+          //console .log (cellInstance) 
+          if ( postion == 0 ) {
+            console.log ('hi in postion 0')
+            console.log ('Enter number to Jump')
+          }
+
+          if ( postion == 1 )
+          {
+            
+            var timeSelector = cells[postion + 1]
+            var vtime   = timeSelector.getElementsByClassName('timeElement')[0] 
+            var vslider = timeSelector.getElementsByClassName('sliderElement')[0] 
+
+            if (buttonX[0].innerHTML == "At")
+            {
+              buttonX[0].innerHTML = "After";
+              vslider.style.display = ''
+              vtime.style.display = 'none'
+
+            }
+            else if (buttonX[0].innerHTML == "After")
+            {
+              buttonX[0].innerHTML = "At";
+              vslider.style.display = 'none'
+              vtime.style.display = ''
+            }
+            else
+            {
+              console.log ("ok lets see")
+              buttonX[0].innerHTML = "After";
+              vslider.style.display = ''
+              vtime.style.display = 'none'
+
+            }
+          }
+          if ( postion == 2 )
+          {
+            
+            cellInstance = cells[postion].getElementsByClassName('sliderElement')[0]
+            console.log ('cellInstance:- ' + cellInstance);
+            var timeSelector = cells[postion]
+            var vtime   = timeSelector.getElementsByClassName('timeElement') 
+            var vslider =  timeSelector.getElementsByClassName('sliderElement') 
+
+            if (vtime[0].style.display == 'none')
+            {
+              console.log ('ok time is disable');
+              openSubPageWhenClick()
+            }
+            else
+            {
+              console.log ('ok slider is disable');
+            }
+
+          }
+          if ( postion == 3 )
+          {
+            
+            if ( buttonX[0].innerHTML == 'Short (5s)' )
+            {
+              buttonX[0].innerHTML = "Medium (15s)";
+            }
+            else if ( buttonX[0].innerHTML == 'Medium (15s)' )
+            {
+              buttonX[0].innerHTML = "Large (30s)";
+            }
+            else if ( buttonX[0].innerHTML == 'Large (30s)' )
+            {
+              buttonX[0].innerHTML = "Short (5s)";
+            }
+            else 
+            {
+              buttonX[0].innerHTML = "Medium (15s)";
+            }
+          }
+          if (postion == 4)
+          {
+            
+            var i = cells[1].parentNode.rowIndex;
+            document.getElementById("myTable").deleteRow(i);
+            console.log ('deleting row ' + i);
+          }
+          //console.log ( cells[postion] )
+          //var buttonX = cells[postion].getElementsByClassName('btn');
+
+          
+
+      };
+  }
+
+})();
+function selectFun3()
+{
+  var some = document.getElementsByClassName('dot');
+  for (var i = 0; i < some.length; i++) 
+  {
+    if (some[i].style.backgroundColor == 'blue')
+    {
+      some[i].style.backgroundColor = "red"
+    }
+    else if (some[i].style.backgroundColor == 'red')
+    {
+      some[i].style.backgroundColor = "blue"
+    } 
+    else
+    {
+      some[i].style.backgroundColor = "blue"
+    }
+
+  }
+
+  
+
+}
+
+function srN() {
+  postion = 0;
+}
+
+function atBtn(arg) {
+  postion = 1;
+}
+function timeBtn(arg) {
+  postion = 2;
+}
+function alTyBtn(arg) {
+  postion = 3;
+}
+function deleBtn(arg) {
+  postion = 4;
+}
+
+
+
+function myFunction()
+{
+  if ( instance != null ) 
+  {
+    jslider_varible = document.getElementById('jslider');
+    slider_value_show = document.getElementById('id_slider_value_show');
+    instance.innerHTML = jslider_varible.value + ' Min';
+  }
+};
+
+// open sub window for delay adjustment
+</script>
+</body>
+</html>
+
+
+
