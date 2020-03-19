@@ -30,30 +30,36 @@ table, td
   margin-top:20px; 
 }
 
-.header 
-{
-  padding: 5px 5px;
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.top-container {
+  background-color: #f1f1f1;
+  padding: 30px;
+  text-align: center;
+}
+
+.header {
+  padding: 10px 16px;
   background: #555;
   color: #f1f1f1;
 }
 
-.content 
-{
-  padding: 5px;
+.content {
+  padding: 16px;
 }
 
-.sticky 
-{
+.sticky {
   position: fixed;
   top: 0;
   width: 100%;
 }
 
-.sticky + .content 
-{
-  padding-top: 0px;
+.sticky + .content {
+  padding-top: 102px;
 }
-
 
 
 
@@ -362,7 +368,13 @@ function newElementTable( arg )
   y.getElementsByClassName('1').className = table.rows.length.toString();
   table.appendChild(y)
   table.lastChild.getElementsByClassName('1').className = '5';
-  console.log (table.rows.length) 
+
+  var x = table.lastElementChild.cells[0].getElementsByClassName('srn')[0];
+  x.innerHTML = table.rows.length-1;
+  //console.log (table.rows.length) 
+  //console.log (x)
+   
+   
 }
 
 function daySelect(arg) 
@@ -401,8 +413,6 @@ for (var i = 0; i < some.length; i++) {
   some[i].style.backgroundColor = 'red'
 }
 }
-
-
 
   var instance;
   (function () 
@@ -520,6 +530,15 @@ for (var i = 0; i < some.length; i++) {
             var i = cells[1].parentNode.rowIndex;
             document.getElementById("myTable").deleteRow(i);
             console.log ('deleting row ' + i);
+
+            console.log (t)
+
+            console.log (t.length)
+            var i;
+            for (i = 1; i < t.rows.length; i++) {
+              t.rows[i].cells[0].getElementsByClassName('srn')[0].innerHTML = i
+            }
+
           }
           //console.log ( cells[postion] )
           //var buttonX = cells[postion].getElementsByClassName('btn');
