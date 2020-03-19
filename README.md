@@ -1,5 +1,5 @@
 sir remind about tarun > 10,000 for 2 month then decide what to do about him.
-
+</br>
 3 Pages 
 1> Home Page
 2> Schudle Page
@@ -9,7 +9,7 @@ sir remind about tarun > 10,000 for 2 month then decide what to do about him.
 2> Schedule Page
 3> device setup
 
-
+</br>
 changes needed in home pages that you have made
 1> change heading name routine setting > Set Schedule
 2> when, time,type must not move when scrolling
@@ -17,7 +17,7 @@ changes needed in home pages that you have made
 4> Schedule name and Schedule save button on top [see scrnshott:1 below attach]
 5> when pressing on Schedule save button all data must get in esp32 or esp8266
 
-
+</br>
 home pages [see image 2 below sent]
 1> connection between app and device must show.
 2> RTC time show with button > pressing on that app time send to the device.
